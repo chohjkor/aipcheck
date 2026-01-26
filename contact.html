@@ -1,25 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Contact - AIP Check</title>
+  <meta charset="UTF-8" />
+  <title>Contact | AIP Check</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact AIP Check." />
+  <meta name="google-adsense-account" content="ca-pub-9973354175126377">
+
+  <style>
+    :root { --text:#111; --muted:#555; --line:#e7e7e7; --bg:#fff; --card:#fafafa; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height:1.7; }
+    main { max-width: 860px; margin: 0 auto; padding: 40px 20px 60px; }
+    h1 { margin:0 0 10px; font-size: 40px; letter-spacing:-0.02em; }
+    h2 { margin: 22px 0 10px; font-size: 22px; }
+    p { margin: 10px 0; }
+    .card { background: var(--card); border:1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin: 14px 0; }
+    .muted { color: var(--muted); }
+    nav { margin-top: 14px; padding-top: 12px; border-top:1px solid var(--line); }
+    nav a { color:#1a0dab; text-decoration:none; margin-right:14px; }
+    nav a:hover { text-decoration:underline; }
+    footer { margin-top: 34px; padding-top: 18px; border-top:1px solid var(--line); font-size: 14px; color: var(--muted); }
+    .small { font-size: 13px; }
+    code { background:#f2f2f2; padding: 2px 6px; border-radius: 6px; }
+  </style>
 </head>
+
 <body>
+  <main>
+    <h1>Contact</h1>
+    <p class="muted">
+      This is an educational project. We welcome feedback about clarity, missing topics, or broken pages.
+    </p>
 
-<h1>Contact</h1>
+    <nav aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="guide.html">Readiness Guide</a>
+      <a href="about-aip-check.html">About</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </nav>
 
-<p>
-If you have any questions about this website, please contact us via email.
-</p>
+    <section class="card">
+      <h2>How to reach us</h2>
+      <p>
+        For now, the easiest way is email. Please include:
+      </p>
+      <ul>
+        <li>The page URL you are referring to</li>
+        <li>A short description of the issue or suggestion</li>
+        <li>Your browser/device (optional but helpful)</li>
+      </ul>
 
-<p>
-Email: <a href="mailto:aipcheck@gmail.com">chohjkor@gmail.com</a>
-</p>
+      <!-- TODO: Replace with your preferred contact email -->
+      <p>
+        Email: <strong>hello@aipcheck.com</strong>
+      </p>
 
-<hr>
-<p>
-<a href="/">Home</a>
-</p>
+      <p class="muted small">
+        If you prefer not to email, you can also open an issue on the project repository (if available).
+      </p>
+    </section>
 
+    <section class="card">
+      <h2>Content and safety note</h2>
+      <p>
+        AIP Check does not provide medical, legal, or financial advice. If your message relates to urgent safety risks or
+        health issues, please consult qualified professionals in your area.
+      </p>
+    </section>
+
+    <footer>
+      <div>© 2026 AIP Check. All rights reserved.</div>
+      <div class="small" style="margin-top:10px;">
+        <a href="privacy.html">Privacy Policy</a> · <a href="about-aip-check.html">About</a>
+      </div>
+    </footer>
+  </main>
 </body>
 </html>
