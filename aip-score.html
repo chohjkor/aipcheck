@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AIP Score Check | AIP Check</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Estimate how ready your home and location are for Aging in Place with a simple self-assessment." />
+  <meta name="google-adsense-account" content="ca-pub-9973354175126377">
+
+  <style>
+    :root {
+      --text: #111;
+      --muted: #666;
+      --line: #e5e5e5;
+      --bg: #ffffff;
+      --card: #fafafa;
+      --accent: #111;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin: 0 0 14px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin: 0 0 10px;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .question {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .question:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .options label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    select {
+      width: 100%;
+      max-width: 320px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      background: #fff;
+    }
+
+    .button {
+      display: inline-block;
+      border: none;
+      background: #111;
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .button:hover {
+      opacity: 0.92;
+    }
+
+    .button.secondary {
+      background: #fff;
+      color: #111;
+      border: 1px solid #111;
+      margin-left: 8px;
+    }
+
+    .result-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      background: #fff;
+      margin-top: 28px;
+    }
+
+    .score {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1;
+      margin: 8px 0 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #f1f1f1;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .recommendations li {
+      margin: 8px 0;
+    }
+
+    .links a {
+      display: inline-block;
+      margin: 8px 12px 0 0;
+      color: #1a0dab;
+      text-decoration: none;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .small {
+      font-size: 13px;
+    }
+
+    .inline-note {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>AIP Score Check</h1>
+    <p class="muted">
+      Estimate how ready your home and daily environment are for Aging in Place.
+      This quick self-assessment is designed for educational purposes and provides general guidance only.
+    </p>
+
+    <div class="card">
+      <h2>Before You Start</h2>
+      <p>
+        This beta tool does not replace a professional assessment. It is intended to help you think about common
+        risks and readiness factors related to long-term independent living.
+      </p>
+
+      <p class="small muted">
+        Educational use only. Not medical, legal, or financial advice.
+      </p>
+    </div>
+
+    <form id="aipForm" class="card">
+      <h2>Basic Information</h2>
+
+      <div class="question">
+        <h3>1. Country</h3>
+        <select id="country">
+          <option value="">Select your country</option>
+          <option>United States</option>
+          <option>Canada</option>
+          <option>United Kingdom</option>
+          <option>Australia</option>
+          <option>Japan</option>
+          <option>South Korea</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <h3>2. Type of home</h3>
+        <select id="homeType">
+          <option value="">Select home type</option>
+          <option>Apartment</option>
+          <option>House</option>
+          <option>Townhouse</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <h2>Readiness Questions</h2>
+
+      <div class="question">
+        <h3>3. Does your home have a step-free entrance?</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="10"> Yes</label>
+          <label><input type="radio" name="q1" value="5"> Somewhat</label>
+          <label><input type="radio" name="q1" value="0"> No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>4. Are stairs required for daily living?</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="10"> No</label>
+          <label><input type="radio" name="q2" value="5"> Some stairs</label>
+          <label><input type="radio" name="q2" value="0"> Many stairs</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>5. Is the bathroom easy to use safely?</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="10"> Yes</label>
+          <label><input type="radio" name="q3" value="5"> Some concerns</label>
+          <label><input type="radio" name="q3" value="0"> No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>6. Is lighting sufficient at night?</h3>
+        <div class="options">
+          <label><input type="radio" name="q4" value="10"> Yes</label>
+          <label><input type="radio" name="q4" value="5"> Partly</label>
+          <label><input type="radio" name="q4" value="0"> No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>7. Are walkways inside the home clear and stable?</h3>
+        <div class="options">
+          <label><input type="radio" name="q5" value="10"> Yes</label>
+          <label><input type="radio" name="q5" value="5"> Somewhat</label>
+          <label><input type="radio" name="q5" value="0"> No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>8. Are essential services nearby (grocery, pharmacy, clinic, transport)?</h3>
+        <div class="options">
+          <label><input type="radio" name="q6" value="10"> Yes</label>
+          <label><input type="radio" name="q6" value="5"> Some are nearby</label>
+          <label><input type="radio" name="q6" value="0"> No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>9. Could this home be modified if needed?</h3>
+        <div class="options">
+          <label><input type="radio" name="q7" value="10"> Yes</label>
+          <label><input type="radio" name="q7" value="5"> Possibly</label>
+          <label><input type="radio" name="q7" value="0"> No</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>10. Do you have support available if daily needs change?</h3>
+        <div class="options">
+          <label><input type="radio" name="q8" value="10"> Yes</label>
+          <label><input type="radio" name="q8" value="5"> Some support</label>
+          <label><input type="radio" name="q8" value="0"> No</label>
+        </div>
+      </div>
+
+      <button type="button" class="button" onclick="calculateScore()">Calculate My AIP Score</button>
+      <button type="reset" class="button secondary" onclick="resetResult()">Reset</button>
+
+      <p class="inline-note">
+        You can use this quick score as a starting point, then continue with the full guide and checklist below.
+      </p>
+    </form>
+
+    <div id="result" class="result-box hidden">
+      <div id="badge" class="badge">Result</div>
+      <div id="score" class="score">0</div>
+      <p id="summary"></p>
+
+      <div class="card">
+        <h3>Top Areas to Improve</h3>
+        <ul id="recommendations" class="recommendations"></ul>
+      </div>
+
+      <div class="card">
+        <h3>Suggested Next Steps</h3>
+        <p id="nextSteps"></p>
+
+        <div class="links">
+          <a href="/guide">Read the AIP Readiness Guide</a>
+          <a href="/home-safety-check">Use the Home Safety Check</a>
+          <a href="/aip-checklist.html">Download the Full Checklist</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Important Note</h3>
+        <p>
+          This result is a simple educational estimate, not a professional inspection or diagnosis.
+          For complex situations, consult qualified housing, accessibility, or healthcare professionals.
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <div>Educational tool only. Not medical, legal, or financial advice.</div>
+      <div>© 2026 AIP Check. All rights reserved.</div>
+      <div class="small" style="margin-top:10px;">
+        <a href="/about-aip-check.html">About</a> ·
+        <a href="/privacy.html">Privacy Policy</a> ·
+        <a href="/contact.html">Contact</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    function getSelectedValue(name) {
+      const selected = document.querySelector(`input[name="${name}"]:checked`);
+      return selected ? parseInt(selected.value, 10) : null;
+    }
+
+    function calculateScore() {
+      const questions = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"];
+      let values = [];
+      let missing = [];
+
+      questions.forEach((q, index) => {
+        const value = getSelectedValue(q);
+        if (value === null) {
+          missing.push(index + 3);
+        } else {
+          values.push(value);
+        }
+      });
+
+      if (missing.length > 0) {
+        alert("Please answer all readiness questions before calculating your score.");
+        return;
+      }
+
+      const rawScore = values.reduce((sum, value) => sum + value, 0); // max 80
+      const score = Math.round((rawScore / 80) * 100);
+
+      let badge = "";
+      let summary = "";
+      let nextSteps = "";
+      let recs = [];
+
+      if (score >= 80) {
+        badge = "Strong AIP Potential";
+        summary = "Your home and daily environment appear to support Aging in Place relatively well. A few targeted improvements may further strengthen long-term independence.";
+        nextSteps = "Review your lower-scoring areas and focus on small preventive improvements. Even strong homes benefit from regular reassessment.";
+      } else if (score >= 60) {
+        badge = "Moderate AIP Potential";
+        summary = "Your home may support Aging in Place, but several barriers could reduce long-term safety or comfort. A focused improvement plan is recommended.";
+        nextSteps = "Start with the highest-impact, lowest-cost changes first. Lighting, bathroom safety, and clear pathways often produce fast improvements.";
+      } else if (score >= 40) {
+        badge = "Limited AIP Readiness";
+        summary = "There are multiple barriers that may make Aging in Place difficult without changes. Your home may need several modifications or support strategies.";
+        nextSteps = "Use the Home Safety Check to identify urgent risks, then review the full checklist or consider a professional consultation.";
+      } else {
+        badge = "High Risk for Aging in Place";
+        summary = "Your current living environment may present significant challenges for Aging in Place. Several risk factors could affect independence and safety.";
+        nextSteps = "Review urgent safety issues first. A more detailed assessment or alternative planning may be necessary.";
+      }
+
+      const labels = [
+        { key: "Entry access", value: getSelectedValue("q1") },
+        { key: "Stair dependency", value: getSelectedValue("q2") },
+        { key: "Bathroom safety", value: getSelectedValue("q3") },
+        { key: "Night lighting", value: getSelectedValue("q4") },
+        { key: "Walkway stability", value: getSelectedValue("q5") },
+        { key: "Nearby services", value: getSelectedValue("q6") },
+        { key: "Home adaptability", value: getSelectedValue("q7") },
+        { key: "Available support", value: getSelectedValue("q8") }
+      ];
+
+      labels.sort((a, b) => a.value - b.value);
+      recs = labels.slice(0, 3).map(item => {
+        if (item.value === 10) {
+          return item.key + " appears relatively strong. Maintain it and review periodically.";
+        }
+        if (item.value === 5) {
+          return item.key + " may need attention. Small improvements could significantly improve readiness.";
+        }
+        return item.key + " appears to be a higher-priority issue. Addressing it early may reduce long-term risk.";
+      });
+
+      document.getElementById("badge").innerText = badge;
+      document.getElementById("score").innerText = score + "/100";
+      document.getElementById("summary").innerText = summary;
+      document.getElementById("nextSteps").innerText = nextSteps;
+
+      const recList = document.getElementById("recommendations");
+      recList.innerHTML = "";
+      recs.forEach(rec => {
+        const li = document.createElement("li");
+        li.innerText = rec;
+        recList.appendChild(li);
+      });
+
+      document.getElementById("result").classList.remove("hidden");
+      document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function resetResult() {
+      document.getElementById("result").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
