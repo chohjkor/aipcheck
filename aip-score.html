@@ -1,700 +1,432 @@
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>AIP Score Check | AIP Check</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Estimate how ready your home and location are for Aging in Place with a structured self-assessment." />
-  <meta name="google-adsense-account" content="ca-pub-9973354175126377">
+<meta charset="UTF-8">
+<title>AIP Score Check | AIP Check</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Estimate how ready your home and location are for Aging in Place.">
 
-  <style>
-    :root {
-      --text: #111;
-      --muted: #666;
-      --line: #e5e5e5;
-      --bg: #ffffff;
-      --card: #fafafa;
-      --accent: #111;
-      --soft: #f3f3f3;
-    }
+<style>
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.7;
-    }
-
-    main {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 40px 20px 80px;
-    }
-
-    h1 {
-      font-size: 40px;
-      margin: 0 0 8px;
-      letter-spacing: -0.02em;
-    }
-
-    h2 {
-      font-size: 24px;
-      margin: 0 0 14px;
-    }
-
-    h3 {
-      font-size: 18px;
-      margin: 0 0 10px;
-    }
-
-    p {
-      margin: 10px 0;
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 20px;
-      margin: 20px 0;
-    }
-
-    .question {
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .question:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      margin-bottom: 0;
-    }
-
-    .options label {
-      display: block;
-      margin: 8px 0;
-      cursor: pointer;
-    }
-
-    input[type="radio"] {
-      margin-right: 8px;
-    }
-
-    input[type="text"],
-    select {
-      width: 100%;
-      max-width: 440px;
-      padding: 12px 14px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-      background: #fff;
-      box-sizing: border-box;
-    }
-
-    .button {
-      display: inline-block;
-      border: none;
-      background: #111;
-      color: #fff;
-      padding: 14px 22px;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .button:hover {
-      opacity: 0.92;
-    }
-
-    .button.secondary {
-      background: #fff;
-      color: #111;
-      border: 1px solid #111;
-      margin-left: 8px;
-    }
-
-    .result-box {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 24px;
-      background: #fff;
-      margin-top: 28px;
-    }
-
-    .score {
-      font-size: 54px;
-      font-weight: 800;
-      line-height: 1;
-      margin: 8px 0 12px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: #f1f1f1;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .recommendations li,
-    .links li {
-      margin: 8px 0;
-    }
-
-    .links a {
-      color: #1a0dab;
-      text-decoration: none;
-    }
-
-    .links a:hover {
-      text-decoration: underline;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .small {
-      font-size: 13px;
-    }
-
-    .inline-note {
-      font-size: 14px;
-      color: var(--muted);
-      margin-top: 8px;
-    }
-
-    .address-box {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 16px;
-      margin-top: 14px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .metric {
-      background: var(--soft);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .metric strong {
-      display: block;
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .metric span {
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    .bar-wrap {
-      margin-top: 8px;
-      background: #ededed;
-      border-radius: 999px;
-      height: 10px;
-      overflow: hidden;
-    }
-
-    .bar {
-      height: 10px;
-      background: #111;
-      border-radius: 999px;
-      width: 0%;
-    }
-
-    footer {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    @media (max-width: 720px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-    }
-       .links li {
-  margin: 10px 0;
+body{
+font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+margin:0;
+background:#ffffff;
+color:#111;
+line-height:1.7;
 }
 
-.links a.button-link {
-  display: inline-block;
-  padding: 10px 16px;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  margin-top: 6px;
+main{
+max-width:900px;
+margin:auto;
+padding:40px 20px;
 }
 
-.links a.button-link:hover {
-  opacity: 0.92;
+h1{font-size:40px;margin-bottom:8px}
+h2{font-size:24px;margin-bottom:14px}
+h3{font-size:18px;margin-bottom:10px}
+
+.card{
+background:#fafafa;
+border:1px solid #e5e5e5;
+border-radius:14px;
+padding:20px;
+margin:20px 0;
 }
-  </style>
+
+.question{
+margin-bottom:22px;
+border-bottom:1px solid #e5e5e5;
+padding-bottom:20px;
+}
+
+.question:last-child{
+border-bottom:none;
+}
+
+.options label{
+display:block;
+margin:6px 0;
+cursor:pointer;
+}
+
+.button{
+background:#111;
+color:white;
+border:none;
+padding:14px 22px;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.result-box{
+border:1px solid #e5e5e5;
+border-radius:14px;
+padding:24px;
+margin-top:30px;
+}
+
+.score{
+font-size:52px;
+font-weight:800;
+margin:10px 0;
+}
+
+.badge{
+display:inline-block;
+background:#f1f1f1;
+padding:6px 12px;
+border-radius:999px;
+font-weight:600;
+margin-bottom:10px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
+}
+
+.metric{
+background:#f5f5f5;
+border:1px solid #e5e5e5;
+border-radius:10px;
+padding:14px;
+}
+
+.barwrap{
+height:10px;
+background:#e5e5e5;
+border-radius:999px;
+overflow:hidden;
+margin-top:6px;
+}
+
+.bar{
+height:10px;
+background:#111;
+width:0%;
+}
+
+.links li{
+margin:10px 0;
+}
+
+.button-link{
+display:inline-block;
+padding:10px 16px;
+background:#111;
+color:#fff;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+}
+
+.hidden{
+display:none;
+}
+
+</style>
 </head>
+
 <body>
-  <main>
-    <h1>AIP Score Check</h1>
-    <p class="muted">
-      Enter your location and answer a few questions to estimate how ready your home and daily environment are for Aging in Place.
-    </p>
 
-    <div class="card">
-      <h2>How This Works</h2>
-      <p>
-        This version of AIP Check evaluates four core areas: home accessibility, safety and usability,
-        location support, and adaptability over time.
-      </p>
-      <p class="small muted">
-        This is an educational self-assessment and does not replace a professional inspection.
-      </p>
-    </div>
+<main>
 
-    <form id="aipForm" class="card">
-      <h2>Location Information</h2>
+<h1>AIP Score Check</h1>
 
-      <div class="address-box">
-        <div class="question">
-          <h3>1. Country</h3>
-          <select id="country">
-            <option value="">Select your country</option>
-            <option>United States</option>
-            <option>Canada</option>
-            <option>United Kingdom</option>
-            <option>Australia</option>
-            <option>Japan</option>
-            <option>South Korea</option>
-            <option>Other</option>
-          </select>
-        </div>
+<p>Answer the questions below to estimate how ready your home and environment are for Aging in Place.</p>
 
-        <div class="question">
-          <h3>2. City or Region</h3>
-          <input type="text" id="city" placeholder="e.g. Seattle, Busan, Toronto" />
-        </div>
+<form id="aipForm" class="card">
 
-        <div class="question">
-          <h3>3. ZIP / Postal Code (optional)</h3>
-          <input type="text" id="zipcode" placeholder="e.g. 98101" />
-        </div>
+<h2>Home Accessibility</h2>
 
-        <div class="question">
-          <h3>4. Home Type</h3>
-          <select id="homeType">
-            <option value="">Select home type</option>
-            <option>Apartment</option>
-            <option>House</option>
-            <option>Townhouse</option>
-            <option>Other</option>
-          </select>
-        </div>
-      </div>
-
-      <h2>Home Accessibility</h2>
-
-      <div class="question">
-        <h3>5. Does your home have a step-free entrance?</h3>
-        <div class="options">
-          <label><input type="radio" name="q1" value="10"> Yes</label>
-          <label><input type="radio" name="q1" value="5"> Somewhat</label>
-          <label><input type="radio" name="q1" value="0"> No</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>6. Are stairs required for daily living?</h3>
-        <div class="options">
-          <label><input type="radio" name="q2" value="10"> No</label>
-          <label><input type="radio" name="q2" value="5"> Some stairs</label>
-          <label><input type="radio" name="q2" value="0"> Many stairs</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>7. Are doorways and circulation paths easy to move through?</h3>
-        <div class="options">
-          <label><input type="radio" name="q3" value="5"> Yes</label>
-          <label><input type="radio" name="q3" value="3"> Somewhat</label>
-          <label><input type="radio" name="q3" value="0"> No</label>
-        </div>
-      </div>
-
-      <h2>Safety & Usability</h2>
-
-      <div class="question">
-        <h3>8. Is the bathroom easy to use safely?</h3>
-        <div class="options">
-          <label><input type="radio" name="q4" value="10"> Yes</label>
-          <label><input type="radio" name="q4" value="5"> Some concerns</label>
-          <label><input type="radio" name="q4" value="0"> No</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>9. Is lighting sufficient at night?</h3>
-        <div class="options">
-          <label><input type="radio" name="q5" value="5"> Yes</label>
-          <label><input type="radio" name="q5" value="3"> Partly</label>
-          <label><input type="radio" name="q5" value="0"> No</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>10. Are walkways inside the home clear and stable?</h3>
-        <div class="options">
-          <label><input type="radio" name="q6" value="5"> Yes</label>
-          <label><input type="radio" name="q6" value="3"> Somewhat</label>
-          <label><input type="radio" name="q6" value="0"> No</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>11. Are frequently used spaces easy to use without strain?</h3>
-        <div class="options">
-          <label><input type="radio" name="q7" value="5"> Yes</label>
-          <label><input type="radio" name="q7" value="3"> Somewhat</label>
-          <label><input type="radio" name="q7" value="0"> No</label>
-        </div>
-      </div>
-
-      <h2>Location Support</h2>
-
-      <div class="question">
-        <h3>12. Are essential services nearby (grocery, pharmacy, clinic, transport)?</h3>
-        <div class="options">
-          <label><input type="radio" name="q8" value="10"> Yes</label>
-          <label><input type="radio" name="q8" value="5"> Some are nearby</label>
-          <label><input type="radio" name="q8" value="0"> No</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>13. Can you access daily services without major difficulty?</h3>
-        <div class="options">
-          <label><input type="radio" name="q9" value="5"> Yes</label>
-          <label><input type="radio" name="q9" value="3"> Sometimes difficult</label>
-          <label><input type="radio" name="q9" value="0"> Difficult</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>14. Is transportation manageable if your mobility changes?</h3>
-        <div class="options">
-          <label><input type="radio" name="q10" value="5"> Yes</label>
-          <label><input type="radio" name="q10" value="3"> Partly</label>
-          <label><input type="radio" name="q10" value="0"> No</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>15. Is the surrounding area reasonably walkable or supportive?</h3>
-        <div class="options">
-          <label><input type="radio" name="q11" value="5"> Yes</label>
-          <label><input type="radio" name="q11" value="3"> Somewhat</label>
-          <label><input type="radio" name="q11" value="0"> No</label>
-        </div>
-      </div>
-
-      <h2>Adaptability & Support</h2>
-
-      <div class="question">
-        <h3>16. Could this home be modified if needed?</h3>
-        <div class="options">
-          <label><input type="radio" name="q12" value="10"> Yes</label>
-          <label><input type="radio" name="q12" value="5"> Possibly</label>
-          <label><input type="radio" name="q12" value="0"> No</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>17. Do you have support available if daily needs change?</h3>
-        <div class="options">
-          <label><input type="radio" name="q13" value="10"> Yes</label>
-          <label><input type="radio" name="q13" value="5"> Some support</label>
-          <label><input type="radio" name="q13" value="0"> No</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>18. Do you feel prepared to make changes if needed?</h3>
-        <div class="options">
-          <label><input type="radio" name="q14" value="5"> Yes</label>
-          <label><input type="radio" name="q14" value="3"> Somewhat</label>
-          <label><input type="radio" name="q14" value="0"> No</label>
-        </div>
-      </div>
-
-      <button type="button" class="button" onclick="calculateScore()">Calculate My AIP Score</button>
-      <button type="reset" class="button secondary" onclick="resetResult()">Reset</button>
-
-      <p class="inline-note">
-        This structured beta version helps identify where your home and surrounding environment may support or limit long-term independent living.
-      </p>
-    </form>
-
-    <div id="result" class="result-box hidden">
-      <div id="badge" class="badge">Result</div>
-      <div id="score" class="score">0</div>
-      <p id="summary"></p>
-
-      <div class="card">
-        <h3>Your Location Context</h3>
-        <p id="locationSummary"></p>
-      </div>
-
-      <div class="card">
-        <h3>Area Scores</h3>
-        <div class="grid-2">
-          <div class="metric">
-            <strong>Home Accessibility</strong>
-            <span id="area1score">0/25</span>
-            <div class="bar-wrap"><div id="bar1" class="bar"></div></div>
-            <p id="area1text" class="small muted"></p>
-          </div>
-
-          <div class="metric">
-            <strong>Safety & Usability</strong>
-            <span id="area2score">0/25</span>
-            <div class="bar-wrap"><div id="bar2" class="bar"></div></div>
-            <p id="area2text" class="small muted"></p>
-          </div>
-
-          <div class="metric">
-            <strong>Location Support</strong>
-            <span id="area3score">0/25</span>
-            <div class="bar-wrap"><div id="bar3" class="bar"></div></div>
-            <p id="area3text" class="small muted"></p>
-          </div>
-
-          <div class="metric">
-            <strong>Adaptability & Support</strong>
-            <span id="area4score">0/25</span>
-            <div class="bar-wrap"><div id="bar4" class="bar"></div></div>
-            <p id="area4text" class="small muted"></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Top 3 Priorities</h3>
-        <ul id="recommendations"></ul>
-      </div>
-
-      <div class="card">
-        <h3>Suggested Next Steps</h3>
-        <p id="nextSteps"></p>
-        <ul class="links">
-          <li><a href="/guide">Read the AIP Readiness Guide</a></li>
-          <li><a href="/home-safety-check">Use the Home Safety Check</a></li>
-          <li><a href="/aip-checklist.html">Download the Full Checklist</a></li>
-        </ul>
-      </div>
-         
-         <div id="offersCard" class="card hidden">
-  <h3>Recommended Next Products & Services</h3>
-  <p id="offersIntro"></p>
-  <ul id="offersList" class="links"></ul>
+<div class="question">
+<h3>Step-free entrance?</h3>
+<div class="options">
+<label><input type="radio" name="q1" value="10">Yes</label>
+<label><input type="radio" name="q1" value="5">Partly</label>
+<label><input type="radio" name="q1" value="0">No</label>
+</div>
 </div>
 
-      <div class="card">
-        <h3>Important Note</h3>
-        <p>
-          This score is an educational estimate and not a professional diagnosis or inspection.
-          A more advanced version may include location-based facility analysis in future updates.
-        </p>
-      </div>
-    </div>
+<div class="question">
+<h3>Are stairs required daily?</h3>
+<div class="options">
+<label><input type="radio" name="q2" value="10">No</label>
+<label><input type="radio" name="q2" value="5">Some</label>
+<label><input type="radio" name="q2" value="0">Many</label>
+</div>
+</div>
 
-    <footer>
-      <div>Educational tool only. Not medical, legal, or financial advice.</div>
-      <div>© 2026 AIP Check. All rights reserved.</div>
-      <div class="small" style="margin-top:10px;">
-        <a href="/about-aip-check.html">About</a> ·
-        <a href="/privacy.html">Privacy Policy</a> ·
-        <a href="/contact.html">Contact</a>
-      </div>
-    </footer>
-  </main>
+<div class="question">
+<h3>Doorways easy to move through?</h3>
+<div class="options">
+<label><input type="radio" name="q3" value="5">Yes</label>
+<label><input type="radio" name="q3" value="3">Somewhat</label>
+<label><input type="radio" name="q3" value="0">No</label>
+</div>
+</div>
 
-  <script>
-    function getSelectedValue(name) {
-      const selected = document.querySelector(`input[name="${name}"]:checked`);
-      return selected ? parseInt(selected.value, 10) : null;
-    }
+<h2>Safety</h2>
 
-    function areaLabel(score) {
-      if (score >= 20) return "Strong";
-      if (score >= 13) return "Moderate";
-      return "Weak";
-    }
+<div class="question">
+<h3>Bathroom safety?</h3>
+<div class="options">
+<label><input type="radio" name="q4" value="10">Safe</label>
+<label><input type="radio" name="q4" value="5">Needs improvement</label>
+<label><input type="radio" name="q4" value="0">Unsafe</label>
+</div>
+</div>
 
-    function areaExplanation(areaName, score) {
-      const label = areaLabel(score);
+<div class="question">
+<h3>Night lighting?</h3>
+<div class="options">
+<label><input type="radio" name="q5" value="5">Good</label>
+<label><input type="radio" name="q5" value="3">Average</label>
+<label><input type="radio" name="q5" value="0">Poor</label>
+</div>
+</div>
 
-      if (areaName === "Home Accessibility") {
-        if (label === "Strong") return "Your home appears relatively accessible for everyday movement and entry.";
-        if (label === "Moderate") return "Some accessibility barriers may affect long-term independence.";
-        return "Physical access may be a significant barrier to Aging in Place.";
-      }
+<div class="question">
+<h3>Clear walkways?</h3>
+<div class="options">
+<label><input type="radio" name="q6" value="5">Yes</label>
+<label><input type="radio" name="q6" value="3">Sometimes</label>
+<label><input type="radio" name="q6" value="0">No</label>
+</div>
+</div>
 
-      if (areaName === "Safety & Usability") {
-        if (label === "Strong") return "Daily use inside the home appears relatively safe and manageable.";
-        if (label === "Moderate") return "Some everyday safety issues may deserve attention.";
-        return "Daily accident risks may be significant without improvement.";
-      }
+<div class="question">
+<h3>Daily spaces comfortable?</h3>
+<div class="options">
+<label><input type="radio" name="q7" value="5">Yes</label>
+<label><input type="radio" name="q7" value="3">Partly</label>
+<label><input type="radio" name="q7" value="0">No</label>
+</div>
+</div>
 
-      if (areaName === "Location Support") {
-        if (label === "Strong") return "Nearby services and local support appear relatively favorable.";
-        if (label === "Moderate") return "Access to daily services may be somewhat limited.";
-        return "Location-related barriers may reduce long-term independence.";
-      }
+<h2>Location</h2>
 
-      if (areaName === "Adaptability & Support") {
-        if (label === "Strong") return "Your home and support situation appear adaptable over time.";
-        if (label === "Moderate") return "Some uncertainty exists around future changes and support needs.";
-        return "Future changes may be difficult to manage without better planning or support.";
-      }
+<div class="question">
+<h3>Essential services nearby?</h3>
+<div class="options">
+<label><input type="radio" name="q8" value="10">Yes</label>
+<label><input type="radio" name="q8" value="5">Some</label>
+<label><input type="radio" name="q8" value="0">No</label>
+</div>
+</div>
 
-      return "";
-    }
+<div class="question">
+<h3>Easy daily access?</h3>
+<div class="options">
+<label><input type="radio" name="q9" value="5">Yes</label>
+<label><input type="radio" name="q9" value="3">Sometimes</label>
+<label><input type="radio" name="q9" value="0">Difficult</label>
+</div>
+</div>
 
-    function calculateScore() {
-      const country = document.getElementById("country").value;
-      const city = document.getElementById("city").value.trim();
-      const zipcode = document.getElementById("zipcode").value.trim();
-      const homeType = document.getElementById("homeType").value;
+<div class="question">
+<h3>Transport available?</h3>
+<div class="options">
+<label><input type="radio" name="q10" value="5">Yes</label>
+<label><input type="radio" name="q10" value="3">Partly</label>
+<label><input type="radio" name="q10" value="0">No</label>
+</div>
+</div>
 
-      if (!country || !city || !homeType) {
-        alert("Please complete Country, City or Region, and Home Type before continuing.");
-        return;
-      }
+<div class="question">
+<h3>Walkable environment?</h3>
+<div class="options">
+<label><input type="radio" name="q11" value="5">Yes</label>
+<label><input type="radio" name="q11" value="3">Somewhat</label>
+<label><input type="radio" name="q11" value="0">No</label>
+</div>
+</div>
 
-      const questionNames = [
-        "q1","q2","q3","q4","q5","q6","q7",
-        "q8","q9","q10","q11",
-        "q12","q13","q14"
-      ];
+<h2>Adaptability</h2>
 
-      for (let q of questionNames) {
-        if (getSelectedValue(q) === null) {
-          alert("Please answer all questions before calculating your score.");
-          return;
-        }
-      }
+<div class="question">
+<h3>Home modifiable?</h3>
+<div class="options">
+<label><input type="radio" name="q12" value="10">Yes</label>
+<label><input type="radio" name="q12" value="5">Possibly</label>
+<label><input type="radio" name="q12" value="0">No</label>
+</div>
+</div>
 
-      const area1 = getSelectedValue("q1") + getSelectedValue("q2") + getSelectedValue("q3");
-      const area2 = getSelectedValue("q4") + getSelectedValue("q5") + getSelectedValue("q6") + getSelectedValue("q7");
-      const area3 = getSelectedValue("q8") + getSelectedValue("q9") + getSelectedValue("q10") + getSelectedValue("q11");
-      const area4 = getSelectedValue("q12") + getSelectedValue("q13") + getSelectedValue("q14");
+<div class="question">
+<h3>Support available?</h3>
+<div class="options">
+<label><input type="radio" name="q13" value="10">Yes</label>
+<label><input type="radio" name="q13" value="5">Some</label>
+<label><input type="radio" name="q13" value="0">No</label>
+</div>
+</div>
 
-      const total = area1 + area2 + area3 + area4;
+<div class="question">
+<h3>Prepared for changes?</h3>
+<div class="options">
+<label><input type="radio" name="q14" value="5">Yes</label>
+<label><input type="radio" name="q14" value="3">Somewhat</label>
+<label><input type="radio" name="q14" value="0">No</label>
+</div>
+</div>
 
-      let badge = "";
-      let summary = "";
-      let nextSteps = "";
+<button type="button" class="button" onclick="calculateScore()">Calculate Score</button>
 
-      if (total >= 80) {
-        badge = "Strong AIP Potential";
-        summary = "Your home and surrounding environment appear to support Aging in Place relatively well. A few targeted improvements may further strengthen long-term independence and safety.";
-        nextSteps = "Maintain your strongest areas and review lower-scoring items periodically. Small preventive improvements now can reduce future risk.";
-      } else if (total >= 60) {
-        badge = "Moderate AIP Potential";
-        summary = "Your current living environment may support Aging in Place, but several barriers could affect long-term comfort, safety, or convenience.";
-        nextSteps = "Start with the highest-impact, lowest-cost changes first. Bathroom safety, lighting, and access barriers often produce the fastest improvement.";
-      } else if (total >= 40) {
-        badge = "Limited AIP Readiness";
-        summary = "There are multiple barriers that may make Aging in Place difficult without changes. Your home may require modifications, better support, or a clearer long-term plan.";
-        nextSteps = "Focus on urgent safety barriers first, then review whether the home can be adapted over time. A more detailed checklist or consultation may help.";
-      } else {
-        badge = "High Risk for Aging in Place";
-        summary = "Your current living environment may present significant challenges for Aging in Place. Several risk factors could affect safety and independence without intervention.";
-        nextSteps = "Review immediate risks first and consider whether substantial changes, outside support, or alternative planning may be needed.";
-      }
+</form>
 
-      const items = [
-        { key: "Step-free entrance", value: getSelectedValue("q1"), rec: "Improve entrance accessibility and reduce step barriers." },
-        { key: "Daily stairs", value: getSelectedValue("q2"), rec: "Review daily stair dependence and consider safer circulation options." },
-        { key: "Circulation paths", value: getSelectedValue("q3"), rec: "Improve doorways or movement paths to make daily circulation easier." },
-        { key: "Bathroom safety", value: getSelectedValue("q4"), rec: "Improve bathroom safety first, especially slip prevention and stable support." },
-        { key: "Night lighting", value: getSelectedValue("q5"), rec: "Upgrade nighttime lighting along key walking routes." },
-        { key: "Walkway stability", value: getSelectedValue("q6"), rec: "Clear and stabilize interior walkways to reduce fall risk." },
-        { key: "Usability of daily spaces", value: getSelectedValue("q7"), rec: "Make frequently used spaces easier to use without strain." },
-        { key: "Nearby essential services", value: getSelectedValue("q8"), rec: "Consider how access to pharmacy, groceries, and clinics may affect long-term independence." },
-        { key: "Daily service access", value: getSelectedValue("q9"), rec: "Review how difficult it is to reach daily services and errands." },
-        { key: "Transportation", value: getSelectedValue("q10"), rec: "Plan how transportation would work if mobility changes over time." },
-        { key: "Walkable/supportive surroundings", value: getSelectedValue("q11"), rec: "Evaluate whether the surrounding environment supports daily living." },
-        { key: "Home adaptability", value: getSelectedValue("q12"), rec: "Review whether your home can realistically be adapted over time." },
-        { key: "Available support", value: getSelectedValue("q13"), rec: "Build a clearer support plan for future daily needs." },
-        { key: "Preparedness", value: getSelectedValue("q14"), rec: "Create a practical plan for future changes before they become urgent." }
-      ];
+<div id="result" class="result-box hidden">
 
-      items.sort((a, b) => a.value - b.value);
-      const priorities = items.slice(0, 3);
+<div id="badge" class="badge"></div>
 
-      let locationSummary = `This score reflects a self-assessment for a ${homeType.toLowerCase()} in ${city}, ${country}`;
-      if (zipcode) locationSummary += ` (${zipcode})`;
-      locationSummary += ".";
+<div id="score" class="score"></div>
 
-      document.getElementById("badge").innerText = badge;
-      document.getElementById("score").innerText = total + "/100";
-      document.getElementById("summary").innerText = summary;
-      document.getElementById("nextSteps").innerText = nextSteps;
-      document.getElementById("locationSummary").innerText = locationSummary;
+<p id="summary"></p>
 
-      document.getElementById("area1score").innerText = `${area1}/25 (${areaLabel(area1)})`;
-      document.getElementById("area2score").innerText = `${area2}/25 (${areaLabel(area2)})`;
-      document.getElementById("area3score").innerText = `${area3}/25 (${areaLabel(area3)})`;
-      document.getElementById("area4score").innerText = `${area4}/25 (${areaLabel(area4)})`;
+<div class="card">
 
-      document.getElementById("area1text").innerText = areaExplanation("Home Accessibility", area1);
-      document.getElementById("area2text").innerText = areaExplanation("Safety & Usability", area2);
-      document.getElementById("area3text").innerText = areaExplanation("Location Support", area3);
-      document.getElementById("area4text").innerText = areaExplanation("Adaptability & Support", area4);
+<h3>Area Scores</h3>
 
-      document.getElementById("bar1").style.width = `${(area1 / 25) * 100}%`;
-      document.getElementById("bar2").style.width = `${(area2 / 25) * 100}%`;
-      document.getElementById("bar3").style.width = `${(area3 / 25) * 100}%`;
-      document.getElementById("bar4").style.width = `${(area4 / 25) * 100}%`;
+<div class="grid">
 
-      const recList = document.getElementById("recommendations");
-      recList.innerHTML = "";
-      priorities.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item.rec;
-        recList.appendChild(li);
-      });
+<div class="metric">
+Accessibility
+<div id="a1"></div>
+<div class="barwrap"><div id="b1" class="bar"></div></div>
+</div>
 
-      document.getElementById("result").classList.remove("hidden");
-      document.getElementById("result").scrollIntoView({ behavior: "smooth" });
-    }
+<div class="metric">
+Safety
+<div id="a2"></div>
+<div class="barwrap"><div id="b2" class="bar"></div></div>
+</div>
 
-    function resetResult() {
-      document.getElementById("result").classList.add("hidden");
-    }
-  </script>
+<div class="metric">
+Location
+<div id="a3"></div>
+<div class="barwrap"><div id="b3" class="bar"></div></div>
+</div>
+
+<div class="metric">
+Adaptability
+<div id="a4"></div>
+<div class="barwrap"><div id="b4" class="bar"></div></div>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<h3>Top 3 Priorities</h3>
+<ul id="priorities"></ul>
+</div>
+
+<div class="card hidden" id="offersCard">
+
+<h3>Recommended Next Products & Services</h3>
+
+<p id="offersIntro"></p>
+
+<ul id="offersList" class="links"></ul>
+
+</div>
+
+</div>
+
+</main>
+
+<script>
+
+function v(n){
+let e=document.querySelector(`input[name="${n}"]:checked`)
+return e?parseInt(e.value):0
+}
+
+function calculateScore(){
+
+let a1=v("q1")+v("q2")+v("q3")
+let a2=v("q4")+v("q5")+v("q6")+v("q7")
+let a3=v("q8")+v("q9")+v("q10")+v("q11")
+let a4=v("q12")+v("q13")+v("q14")
+
+let total=a1+a2+a3+a4
+
+document.getElementById("score").innerText=total+"/100"
+
+if(total>=80){
+document.getElementById("badge").innerText="Strong AIP Potential"
+document.getElementById("summary").innerText="Your home appears supportive for long-term independent living."
+}else if(total>=60){
+document.getElementById("badge").innerText="Moderate AIP Potential"
+document.getElementById("summary").innerText="Some improvements may significantly increase long-term safety."
+}else if(total>=40){
+document.getElementById("badge").innerText="Limited AIP Readiness"
+document.getElementById("summary").innerText="Multiple barriers may affect Aging in Place."
+}else{
+document.getElementById("badge").innerText="High Risk for Aging in Place"
+document.getElementById("summary").innerText="Major barriers exist for independent living."
+}
+
+document.getElementById("a1").innerText=a1+"/25"
+document.getElementById("a2").innerText=a2+"/25"
+document.getElementById("a3").innerText=a3+"/25"
+document.getElementById("a4").innerText=a4+"/25"
+
+document.getElementById("b1").style.width=(a1/25*100)+"%"
+document.getElementById("b2").style.width=(a2/25*100)+"%"
+document.getElementById("b3").style.width=(a3/25*100)+"%"
+document.getElementById("b4").style.width=(a4/25*100)+"%"
+
+let offersIntro=""
+let offers=[]
+
+if(total>=80){
+offersIntro="Focus on prevention and maintenance."
+offers=[
+{t:"Download Home Safety Checklist",h:"/aip-checklist.html"},
+{t:"Read AIP Guide",h:"/guide"}
+]
+}else if(total>=60){
+offersIntro="Small upgrades can greatly improve safety."
+offers=[
+{t:"Download Safety Checklist",h:"/aip-checklist.html"},
+{t:"Review Bathroom Safety Guide",h:"/home-safety-check"}
+]
+}else if(total>=40){
+offersIntro="Focus on major safety improvements first."
+offers=[
+{t:"Download Full AIP Checklist",h:"/aip-checklist.html"},
+{t:"Request detailed readiness review",h:"#"}
+]
+}else{
+offersIntro="Consider professional consultation."
+offers=[
+{t:"Download AIP Checklist",h:"/aip-checklist.html"},
+{t:"Book consultation",h:"#"}
+]
+}
+
+document.getElementById("offersIntro").innerText=offersIntro
+
+let list=document.getElementById("offersList")
+list.innerHTML=""
+
+offers.forEach(o=>{
+let li=document.createElement("li")
+li.innerHTML=`<a class="button-link" href="${o.h}">${o.t}</a>`
+list.appendChild(li)
+})
+
+document.getElementById("offersCard").classList.remove("hidden")
+document.getElementById("result").classList.remove("hidden")
+
+}
+
+</script>
+
 </body>
 </html>
