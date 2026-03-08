@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>AIP Score Check | AIP Check</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Estimate how ready your home and location are for Aging in Place with a simple self-assessment." />
+  <meta name="description" content="Check how ready your home and location are for Aging in Place with a simple address-based self-assessment." />
   <meta name="google-adsense-account" content="ca-pub-9973354175126377">
 
   <style>
@@ -85,14 +85,16 @@
       margin-right: 8px;
     }
 
+    input[type="text"],
     select {
       width: 100%;
-      max-width: 320px;
-      padding: 10px 12px;
+      max-width: 420px;
+      padding: 12px 14px;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 15px;
       background: #fff;
+      box-sizing: border-box;
     }
 
     .button {
@@ -163,14 +165,6 @@
       display: none;
     }
 
-    footer {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-      font-size: 14px;
-      color: var(--muted);
-    }
-
     .small {
       font-size: 13px;
     }
@@ -180,60 +174,86 @@
       color: var(--muted);
       margin-top: 8px;
     }
+
+    .address-box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
   <main>
     <h1>AIP Score Check</h1>
     <p class="muted">
-      Estimate how ready your home and daily environment are for Aging in Place.
-      This quick self-assessment is designed for educational purposes and provides general guidance only.
+      Enter your location and answer a few questions to estimate how ready your home and daily environment are for Aging in Place.
     </p>
 
     <div class="card">
-      <h2>Before You Start</h2>
+      <h2>How This Beta Tool Works</h2>
       <p>
-        This beta tool does not replace a professional assessment. It is intended to help you think about common
-        risks and readiness factors related to long-term independent living.
+        This beta version combines location information and self-reported home conditions to produce a simple readiness estimate.
+        It is designed to support awareness and planning, not to replace a professional assessment.
       </p>
-
       <p class="small muted">
         Educational use only. Not medical, legal, or financial advice.
       </p>
     </div>
 
     <form id="aipForm" class="card">
-      <h2>Basic Information</h2>
+      <h2>Location Information</h2>
 
-      <div class="question">
-        <h3>1. Country</h3>
-        <select id="country">
-          <option value="">Select your country</option>
-          <option>United States</option>
-          <option>Canada</option>
-          <option>United Kingdom</option>
-          <option>Australia</option>
-          <option>Japan</option>
-          <option>South Korea</option>
-          <option>Other</option>
-        </select>
+      <div class="address-box">
+        <div class="question">
+          <h3>1. Country</h3>
+          <select id="country">
+            <option value="">Select your country</option>
+            <option>United States</option>
+            <option>Canada</option>
+            <option>United Kingdom</option>
+            <option>Australia</option>
+            <option>Japan</option>
+            <option>South Korea</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="question">
+          <h3>2. City or Region</h3>
+          <input type="text" id="city" placeholder="e.g. Seattle, Busan, Toronto" />
+        </div>
+
+        <div class="question">
+          <h3>3. ZIP / Postal Code (optional)</h3>
+          <input type="text" id="zipcode" placeholder="e.g. 98101" />
+        </div>
+
+        <div class="question">
+          <h3>4. Home Type</h3>
+          <select id="homeType">
+            <option value="">Select home type</option>
+            <option>Apartment</option>
+            <option>House</option>
+            <option>Townhouse</option>
+            <option>Other</option>
+          </select>
+        </div>
       </div>
 
-      <div class="question">
-        <h3>2. Type of home</h3>
-        <select id="homeType">
-          <option value="">Select home type</option>
-          <option>Apartment</option>
-          <option>House</option>
-          <option>Townhouse</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <h2>Readiness Questions</h2>
+      <h2>Home Readiness Questions</h2>
 
       <div class="question">
-        <h3>3. Does your home have a step-free entrance?</h3>
+        <h3>5. Does your home have a step-free entrance?</h3>
         <div class="options">
           <label><input type="radio" name="q1" value="10"> Yes</label>
           <label><input type="radio" name="q1" value="5"> Somewhat</label>
@@ -242,7 +262,7 @@
       </div>
 
       <div class="question">
-        <h3>4. Are stairs required for daily living?</h3>
+        <h3>6. Are stairs required for daily living?</h3>
         <div class="options">
           <label><input type="radio" name="q2" value="10"> No</label>
           <label><input type="radio" name="q2" value="5"> Some stairs</label>
@@ -251,7 +271,7 @@
       </div>
 
       <div class="question">
-        <h3>5. Is the bathroom easy to use safely?</h3>
+        <h3>7. Is the bathroom easy to use safely?</h3>
         <div class="options">
           <label><input type="radio" name="q3" value="10"> Yes</label>
           <label><input type="radio" name="q3" value="5"> Some concerns</label>
@@ -260,7 +280,7 @@
       </div>
 
       <div class="question">
-        <h3>6. Is lighting sufficient at night?</h3>
+        <h3>8. Is lighting sufficient at night?</h3>
         <div class="options">
           <label><input type="radio" name="q4" value="10"> Yes</label>
           <label><input type="radio" name="q4" value="5"> Partly</label>
@@ -269,7 +289,7 @@
       </div>
 
       <div class="question">
-        <h3>7. Are walkways inside the home clear and stable?</h3>
+        <h3>9. Are walkways inside the home clear and stable?</h3>
         <div class="options">
           <label><input type="radio" name="q5" value="10"> Yes</label>
           <label><input type="radio" name="q5" value="5"> Somewhat</label>
@@ -278,7 +298,7 @@
       </div>
 
       <div class="question">
-        <h3>8. Are essential services nearby (grocery, pharmacy, clinic, transport)?</h3>
+        <h3>10. Are essential services nearby (grocery, pharmacy, clinic, transport)?</h3>
         <div class="options">
           <label><input type="radio" name="q6" value="10"> Yes</label>
           <label><input type="radio" name="q6" value="5"> Some are nearby</label>
@@ -287,7 +307,7 @@
       </div>
 
       <div class="question">
-        <h3>9. Could this home be modified if needed?</h3>
+        <h3>11. Could this home be modified if needed?</h3>
         <div class="options">
           <label><input type="radio" name="q7" value="10"> Yes</label>
           <label><input type="radio" name="q7" value="5"> Possibly</label>
@@ -296,7 +316,7 @@
       </div>
 
       <div class="question">
-        <h3>10. Do you have support available if daily needs change?</h3>
+        <h3>12. Do you have support available if daily needs change?</h3>
         <div class="options">
           <label><input type="radio" name="q8" value="10"> Yes</label>
           <label><input type="radio" name="q8" value="5"> Some support</label>
@@ -308,7 +328,7 @@
       <button type="reset" class="button secondary" onclick="resetResult()">Reset</button>
 
       <p class="inline-note">
-        You can use this quick score as a starting point, then continue with the full guide and checklist below.
+        Your location details help make the tool feel more contextual. Full location-based analysis will be added in future updates.
       </p>
     </form>
 
@@ -316,6 +336,11 @@
       <div id="badge" class="badge">Result</div>
       <div id="score" class="score">0</div>
       <p id="summary"></p>
+
+      <div class="card">
+        <h3>Your Location Context</h3>
+        <p id="locationSummary"></p>
+      </div>
 
       <div class="card">
         <h3>Top Areas to Improve</h3>
@@ -336,8 +361,8 @@
       <div class="card">
         <h3>Important Note</h3>
         <p>
-          This result is a simple educational estimate, not a professional inspection or diagnosis.
-          For complex situations, consult qualified housing, accessibility, or healthcare professionals.
+          This score is an educational estimate, not a professional assessment.
+          A more advanced location-based version will include local service access and environmental factors.
         </p>
       </div>
     </div>
@@ -360,6 +385,16 @@
     }
 
     function calculateScore() {
+      const country = document.getElementById("country").value;
+      const city = document.getElementById("city").value.trim();
+      const zipcode = document.getElementById("zipcode").value.trim();
+      const homeType = document.getElementById("homeType").value;
+
+      if (!country || !city || !homeType) {
+        alert("Please complete Country, City/Region, and Home Type before continuing.");
+        return;
+      }
+
       const questions = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"];
       let values = [];
       let missing = [];
@@ -367,18 +402,18 @@
       questions.forEach((q, index) => {
         const value = getSelectedValue(q);
         if (value === null) {
-          missing.push(index + 3);
+          missing.push(index + 5);
         } else {
           values.push(value);
         }
       });
 
       if (missing.length > 0) {
-        alert("Please answer all readiness questions before calculating your score.");
+        alert("Please answer all home readiness questions before calculating your score.");
         return;
       }
 
-      const rawScore = values.reduce((sum, value) => sum + value, 0); // max 80
+      const rawScore = values.reduce((sum, value) => sum + value, 0);
       const score = Math.round((rawScore / 80) * 100);
 
       let badge = "";
@@ -388,20 +423,20 @@
 
       if (score >= 80) {
         badge = "Strong AIP Potential";
-        summary = "Your home and daily environment appear to support Aging in Place relatively well. A few targeted improvements may further strengthen long-term independence.";
-        nextSteps = "Review your lower-scoring areas and focus on small preventive improvements. Even strong homes benefit from regular reassessment.";
+        summary = "Your home and surrounding conditions appear to support Aging in Place relatively well. A few targeted improvements may further strengthen long-term independence.";
+        nextSteps = "Review your lowest-scoring areas and make small preventive improvements before problems arise.";
       } else if (score >= 60) {
         badge = "Moderate AIP Potential";
-        summary = "Your home may support Aging in Place, but several barriers could reduce long-term safety or comfort. A focused improvement plan is recommended.";
-        nextSteps = "Start with the highest-impact, lowest-cost changes first. Lighting, bathroom safety, and clear pathways often produce fast improvements.";
+        summary = "Your current living environment may support Aging in Place, but several barriers could affect long-term comfort, safety, or convenience.";
+        nextSteps = "Start with the highest-impact, lowest-cost changes first, especially around safety and daily usability.";
       } else if (score >= 40) {
         badge = "Limited AIP Readiness";
-        summary = "There are multiple barriers that may make Aging in Place difficult without changes. Your home may need several modifications or support strategies.";
-        nextSteps = "Use the Home Safety Check to identify urgent risks, then review the full checklist or consider a professional consultation.";
+        summary = "There are multiple barriers that may make Aging in Place difficult without modifications or additional support.";
+        nextSteps = "Use the Home Safety Check to identify urgent risks, then review the full checklist or consider expert input.";
       } else {
         badge = "High Risk for Aging in Place";
-        summary = "Your current living environment may present significant challenges for Aging in Place. Several risk factors could affect independence and safety.";
-        nextSteps = "Review urgent safety issues first. A more detailed assessment or alternative planning may be necessary.";
+        summary = "Your home and daily environment may present significant challenges for long-term independent living.";
+        nextSteps = "Review urgent risks first and consider whether modifications, support, or alternative planning are needed.";
       }
 
       const labels = [
@@ -421,15 +456,20 @@
           return item.key + " appears relatively strong. Maintain it and review periodically.";
         }
         if (item.value === 5) {
-          return item.key + " may need attention. Small improvements could significantly improve readiness.";
+          return item.key + " may need attention. Small improvements could make a meaningful difference.";
         }
         return item.key + " appears to be a higher-priority issue. Addressing it early may reduce long-term risk.";
       });
+
+      const locationText = zipcode
+        ? `This score reflects a self-assessment for a ${homeType.toLowerCase()} in ${city}, ${country} (${zipcode}).`
+        : `This score reflects a self-assessment for a ${homeType.toLowerCase()} in ${city}, ${country}.`;
 
       document.getElementById("badge").innerText = badge;
       document.getElementById("score").innerText = score + "/100";
       document.getElementById("summary").innerText = summary;
       document.getElementById("nextSteps").innerText = nextSteps;
+      document.getElementById("locationSummary").innerText = locationText;
 
       const recList = document.getElementById("recommendations");
       recList.innerHTML = "";
